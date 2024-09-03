@@ -220,6 +220,8 @@ $$
 B[i] = B[i-1] + A[i] \quad \forall i, \ 1 \leq i < N \tag{2b}
 $$
 
+which has complexity $O(N)$, better than the naive $O(N^2)$ complexity of the original loop, which it achieves by setting a base case and reusing computation (like a simple DP). 
+
 We could have instead used the reuse vector $[-1,0]^{T}$ to denote the shared computation changing $i$ to $i-1$ and $j$ to $j-0$, resulting in the following set of statements:
 
 $$
