@@ -2,23 +2,52 @@
 layout: pages
 ---
 
+<style>
+    .MathJax_Display {
+        position: relative;
+    }
+
+    .MathJax_Display .MJX-eqn-num {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+
 <div class="content post">
     <h1>{{ page.title }}</h1>
     <time>{{ page.date | date_to_string }}</time>
 
     {%- comment -%}
-        See '/ofri' or '2019-03-07-whats-Kikofri.md'
-        for explanations.
+    See '/ofri' or '2019-03-07-whats-Kikofri.md'
+    for explanations.
     {%- endcomment -%}
 
-    
+
     {%- if content contains 'µ#' or 'µ;;;' or 'µµ' -%}
-        {{- content
-            | replace: 'µ#', '<sup>[' | replace: '#µ', ']</sup>'
-            | replace: 'µ;;', '<b>' | replace: ';;µ', '</b>'
-            | replace: "µµ", "&emsp;" }}
+    {{- content
+    | replace: 'µ#', '<sup>[' | replace: '#µ', ']</sup>'
+    | replace: 'µ;;', '<b>' | replace: ';;µ', '</b>'
+    | replace: "µµ", "&emsp;" }}
     {%- else -%}
-        {{- content -}}
+    {{- content -}}
     {%- endif -%}
 
 </div>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+</script>
