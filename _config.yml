@@ -8,15 +8,15 @@
 #
 # Basic, either your jekyll site's name or
 # an organization.
-name: "K i k o f r i"
-description: "dirty and malnourished jekyll theme"
+name: "Daniel Bashir"
+description: "personal site"
 
 # This should be a person of some sort.
-author: "kxxvii"
+author: "daniel bashir"
 
 # Would make sense to use the 'name:' above
 # here. This is an alternative title.
-title: "Kikofri - Live Undead (1988, Moscow)"
+title: "Daniel Bashir"
 
 # 'en_US' is the default language. Enter a
 # new default language here. Making 'en_US'
@@ -42,6 +42,11 @@ permalink: /:year/:month/:day/:title.html
 # Markdown
 markdown: kramdown
 
+# Collectios
+collections:
+  questions:
+    output: true
+
 # Navigation
 nav:
  - name: "about"
@@ -50,8 +55,13 @@ nav:
  - name: "tags"
    href: "/tags"
 
- - name: "feed"
-   href: "/feed.xml"
-
  - name: "contact"
-   href: "/mailto:ivantheterrible@1530to1584.gov"
+   href: "/mailto:dbashir@hmc.edu"
+
+ - name: "questions"
+   href: "/questions"
+
+social_links:
+  github: "https://github.com/db7894"
+  twitter: "https://twitter.com/spaniel_bashir"
+  goodreads: "https://www.goodreads.com/user/show/78718254-daniel-bashir"

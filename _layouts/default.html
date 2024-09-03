@@ -21,6 +21,24 @@
             <a href="{{ site.url }}{{ nav.href }}">{{ nav.name }}</a>
             {% endfor %}
         </nav>
+        <div class="social-icons">
+            {% if site.social_links.github %}
+            <a href="{{ site.social_links.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            {% endif %}
+            {% if site.social_links.twitter %}
+            <a href="{{ site.social_links.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            {% endif %}
+            {% if site.social_links.goodreads %}
+            <a href="{{ site.social_links.goodreads }}" target="_blank" rel="noopener noreferrer"
+                aria-label="Goodreads">
+                <i class="fab fa-goodreads"></i>
+            </a>
+            {% endif %}
+        </div>
     </header>
 
     {% endif %}
