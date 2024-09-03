@@ -196,7 +196,7 @@ pre, code {
     text-transform: none;
 }
 pre {
-    padding: 1rem 0.2rem;
+    padding: 0.2rem 0.2rem;
 }
 
 /* Formatting of the post description.
@@ -358,6 +358,44 @@ hr {
     }
     time {
         display: none;
+    }
+}
+
+.ideas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.idea-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
+
+    .idea-content {
+        display: none;
+    }
+
+    &.expanded {
+        grid-column: 1 / -1;
+
+        .idea-content {
+            display: block;
+            margin-top: 1rem;
+        }
     }
 }
 

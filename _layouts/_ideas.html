@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div class="container">
+    <h1>Ideas</h1>
+    <div class="ideas-container">
+        {{ content }}
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.idea-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('expanded');
+        });
+    });
+</script>
