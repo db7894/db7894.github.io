@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link rel="alternate" type="application/atom+xml" title="Feed for {{ site.url }}" href="/feed.xml">
 
     {%- comment -%}
-        See '_includes/captures.html'.
+    See '_includes/captures.html'.
     {%- endcomment -%}
 
     {%- include captures.html %}
@@ -29,8 +30,8 @@
     {%- endif %}
     <meta property="og:title" content="{{ title }}" />
     {% comment -%}
-        Language can be set by setting 'lang: ab_CD'
-        in '_config.yml'.
+    Language can be set by setting 'lang: ab_CD'
+    in '_config.yml'.
     {%- endcomment -%}
     {% if site.lang -%}
     <meta property="og:locale" content="{{ site.lang }}" />
@@ -38,12 +39,12 @@
     {%- else -%}
     <meta property="og:locale" content="en_US" />
     {%- endif %}
-    
+
     {% comment -%}
-       Instead of just removing the newlines and
-       the whitespace here I left it as it is.
-       Much easier to read/edit should the need
-       arise.
+    Instead of just removing the newlines and
+    the whitespace here I left it as it is.
+    Much easier to read/edit should the need
+    arise.
     {%- endcomment -%}
 
     <script type="application/ld+json">
@@ -74,5 +75,8 @@
     }
     </script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
+
 <body>
