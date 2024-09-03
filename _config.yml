@@ -35,8 +35,8 @@ logo:
 # # # # #
 
 # URL-stuff, don't forget the 'http...'-part
-url: "db7894.github.io"
-#baseurl: ""
+url: "https://db7894.github.io"
+baseurl: ""
 permalink: /:year/:month/:day/:title.html
 
 # Markdown
