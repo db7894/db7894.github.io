@@ -96,6 +96,25 @@ The polyhedral model is a powerful technique in compiler optimization — its in
 
 I hope to write a fuller intro in another post, but for the purposes of explaining this paper I'll give a brief intro to how this works and show how it can be used for optimizations like reordering loops. You can understand the main heuristic algorithm in this paper without too much detail on the polyhedral model, but it's helpful to understand it as motivation.
 
+### Some Intuition ###
+
+I'll describe the model in a bit more technical detail below, but the following might help build some intuition: the polyhedral model allows us to think about loopnests as _polyhedra_ (hence the name) defined by the bounds of the loops that make up the loopnests (technically in more than three dimensions these are called polytopeds and the polyhedral model is also referred to as the polytope method). 
+
+If we consider a doubly-nested loop:
+```
+for (i = 0; i < N; i++) {
+  for (j = 0; j <= i; j++) {
+    // do something
+  }
+}
+```
+we can think of each iteration of the loop as a point $(i,j)$ in 2D space. The _bounds_ of the loops define a shape containing all these points — a polygon in 2D, a polyhedron in 3D, and polytopes in higher dimensions. The loop bounds define a set of points that are _valid_ iterations of the loop, which in this case looks like a triangle:
+
+![Simple loop bounds example.]({{ site.url }}/assets/images/triangle_loop_bounds.png)
+<p class="pic">Simple loop bounds example</p> 
+
+With a figure like this, dependencies can be represented as arrows between points. I'll use a similar example again below with some more detail and introduce a formalization of the polyhedral model.
+
 #### Representing Loops ####
 
 A loop can be represented as a set of constraints on the possible values of the loop variables. For example, the loop:
@@ -108,7 +127,7 @@ for (i = 0; i < N; i++) {
 ```
 can be represented as the constraints:
 
-![Loop iteration space example. CC0.]({{ site.url }}/assets/images/simple_loop_poly_example.png)
+![Loop iteration space example.]({{ site.url }}/assets/images/simple_loop_poly_example.png)
 <p class="pic">Loop iteration space example</p> 
 
 Each point in this polyhedron represents one execution of the innermost statement (A[i] += B[j]). The coordinates of the point correspond to the values of i and j for that execution.
@@ -155,7 +174,7 @@ $$ P = [N] → {[i, j] : 0 \leq i < N \text{ and } 0 \leq j \leq i} $$
 
 This polyhedral set defines all valid points $(i,j)$ for our loop — this is also called the _iteration space_ of the loop. In our loop, each `A[i] += B[j]` operation depends on the previous iterations with the same $i$. We can represent this as arrows in our diagram.
 
-![Polyhedral reduction example with dependencies. CC0.]({{ site.url }}/assets/images/simple_example_with_dependencies.png)
+![Polyhedral reduction example with dependencies.]({{ site.url }}/assets/images/simple_example_with_dependencies.png)
 <p class="pic">Polyhedral reduction example with dependencies</p> 
 
 To compute `A[2]`, for instance, we need to perform all the additions for `i=2` in order from `j=0` to `j=2`.
@@ -210,7 +229,9 @@ $$
 B[i] = \sum_{j=0}^{i} A[j] \quad \forall i, \ 0 \leq i < N \tag{1}
 $$
 
-We would ordinarily optimize this with something called the _Simplification Transformation_ (ST), which codifies profitably reusable computations into a set of _reuse vectors_. In (1), the reuse vector $[1,0]^{T}$ denotes the shared computation changing $i$ to $i+1$ and $j$ to $j+0$. ST, given an equational statement like (1) and a reuse vector, transforms the statement into a set of statements that are semantically equivalent to the original statement, but reuse shared computation. Given (1) and $[1,0]^{T}$, ST would transform (1) into the following set of statements:
+We would ordinarily optimize this with something called the _Simplification Transformation_ (ST), which codifies profitably reusable computations into a set of _reuse vectors_. Intuitively, these vectors point from one iteration to another iteration that performs some of the same computation. Knowing about the shared computation between different loop iterations, we can restructure code to perform that shared computation once and reuse the results instead of recomputing. 
+
+In (1), the reuse vector $[1,0]^{T}$ denotes the shared computation changing $i$ to $i+1$ and $j$ to $j+0$. ST, given an equational statement like (1) and a reuse vector, transforms the statement into a set of statements that are semantically equivalent to the original statement, but reuse shared computation. Given (1) and $[1,0]^{T}$, ST would transform (1) into the following set of statements:
 
 $$
 B[0] = A[0] \tag{2a}
@@ -250,17 +271,17 @@ For instance, if we had applied the reuse vector $[-1,0]^{T}$ to (4), we would h
 
 To illustrate valid and invalid reuse directions, let's look at Figure 1 from the paper, which shows the iteration space of the prefix sum loop:
 
-![Iteration space of the prefix sum loop. CC0.]({{ site.url }}/assets/images/prefix_sum_iteration_space.png)
+![Iteration space of the prefix sum loop.]({{ site.url }}/assets/images/prefix_sum_iteration_space.png)
 <p class="pic">Iteration space of the prefix sum loop</p> 
 
 The polyhedron with round dots at the top represents the iteration domain of the reduction statement `B[i] += A[j]` (each round dot denotes an iteration _instance_ of the statement). The elements `A[0]` through `A[4]` on the right are the array elements `A[j]` to be accumulated into `B[i]`. The bottom polyhedron with squares it eh iteration domain for the statement `A[i+1] = f(B[i])`, while the middle polyhedron with diamonds is an additional polyhedron that the author's technique inserts into a program's polyhedral representation to denote the _completion_ of each reduction `B[i]`.
 
 Each arrow represents a data dependency in iteration space — an arrow from $a$ to $b$ means that $a$ needs to execute before $b$. Figures 2 and 3, below, show the correct and incorrect optimizations of our dependent prefix sum with the reuse vectors $[1,0]^{T}$ and $[-1,0]^{T}$, respectively.
 
-<img src="{{ site.url }}/assets/images/figure_2_paper.png" alt="Correct optimization of the dependent prefix sum with the reuse vector [1,0]^T. CC0." style="width: 100%; max-width: 800px;">
+<img src="{{ site.url }}/assets/images/figure_2_paper.png" alt="Correct optimization of the dependent prefix sum with the reuse vector [1,0]^T." style="width: 100%; max-width: 800px;">
 <p class="pic">Correct optimization of the dependent prefix sum with the reuse vector $[1,0]^{T}$</p> 
 
-<img src="{{ site.url }}/assets/images/figure_3_paper.png" alt="Incorrect optimization of the dependent prefix sum with the reuse vector [-1,0]^T. CC0." style="width: 100%; max-width: 800px;">
+<img src="{{ site.url }}/assets/images/figure_3_paper.png" alt="Incorrect optimization of the dependent prefix sum with the reuse vector [-1,0]^T." style="width: 100%; max-width: 800px;">
 <p class="pic">Incorrect optimization of the dependent prefix sum with the reuse vector $[-1,0]^{T}$</p> 
 
 
@@ -282,7 +303,7 @@ The key insight uses this notion: instead of trying to optimize the entire reduc
 
 Revisiting the prefix sum example and its iteration space:
 
-![Loop iteration space example. CC0.]({{ site.url }}/assets/images/simple_loop_poly_example.png)
+![Loop iteration space example.]({{ site.url }}/assets/images/simple_loop_poly_example.png)
 <p class="pic">Loop iteration space example</p> 
 
 we can consider faces and their corresponding reuse vectors:
