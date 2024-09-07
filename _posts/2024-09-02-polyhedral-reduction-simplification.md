@@ -366,4 +366,4 @@ def optimize_dependent_reductions(program):
 This heuristic approach is proven to be optimal for reductions with inverse operators (like addition/subtraction), which covers many practical cases. This post is already long, so I'll save more details on that for a (potential) future post.
 
 ### Code! ###
-I wrote up a little implementation of this heuristic algorithm that works for the basic prefix sum example and a dependent loop reduction — cleaning it up and once it's ready you'll find it [here](https://github.com/db7894/simplifying-dependent-reductions-polyhedral)! 
+I wrote up a little implementation of this heuristic algorithm that works for the basic prefix sum example and a dependent loop reduction — you'll find it [here](https://github.com/db7894/simplifying-dependent-reductions-polyhedral)! 
