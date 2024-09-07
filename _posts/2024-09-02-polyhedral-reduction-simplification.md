@@ -20,7 +20,7 @@ p.pic {
 }
 </style>
 
-![Cover image]({{ site.url }}/assets/images/post_img.png)
+![Cover image]({{ site.url }}/assets/images/post_cover_img.jpg)
 
 I read this really neat paper recently called ["Simplifying Dependent Reductions in the Polyhedral Model"](https://arxiv.org/pdf/2007.11203) by Cambridge Yang, Eric Atkinson, and Michael Carbin. I'll give a rundown of the main ideas: what (dependent) reductions are, why they matter (especially in ML), how this paper uses the polyhedral model to simplify them, and why that matters. 
 
