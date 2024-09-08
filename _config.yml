@@ -46,6 +46,7 @@ markdown: kramdown
 collections:
   questions:
     output: true
+    permalink: /questions/:name/
 
 # Navigation
 nav:
@@ -65,3 +66,16 @@ social_links:
   github: "https://github.com/db7894"
   twitter: "https://twitter.com/spaniel_bashir"
   goodreads: "https://www.goodreads.com/user/show/78718254-daniel-bashir"
+
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "questions"
+    values:
+      layout: "questions"

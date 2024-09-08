@@ -44,24 +44,31 @@
     {% endif %}
 
     {% comment %}
-    If true: 'archive', else 'index'
+    Render content for questions and other pages
     {% endcomment %}
-    {%- if page.pagin -%}
+    {% if page.layout == 'questions' or page.layout == 'page' %}
+        {{ content }}
+    {% else %}
+        {% comment %}
+        If true: 'archive', else 'index'
+        {% endcomment %}
+        {%- if page.pagin -%}
 
-    {%- include top_small.html -%}
-    {%- include arch_css.html -%}
+            {%- include top_small.html -%}
+            {%- include arch_css.html -%}
 
-    {%- for post in site.posts offset: pagnum %}
-    {% include loop.html %}
-    {%- endfor -%}
+            {%- for post in site.posts offset: pagnum %}
+                {% include loop.html %}
+            {%- endfor -%}
 
-    {%- else -%}
+        {%- else -%}
 
-    {%- for post in site.posts limit: pagnum -%}
-    {%- include loop.html -%}
-    {%- endfor -%}
+            {%- for post in site.posts limit: pagnum -%}
+                {%- include loop.html -%}
+            {%- endfor -%}
 
-    {%- endif -%}
+        {%- endif -%}
+    {% endif %}
 </div>
 
 {%- include foot.html -%}

@@ -4,15 +4,35 @@ layout: default
 
 <div class="container">
     <h1>Questions</h1>
+    <p>this is a short-form repository of things i'm wondering about, at varying levels of granularity/detail</p>
     <div class="questions-container">
-        {{ content }}
+        {% for question in site.questions %}
+        <div class="question-card">
+            <h2>{{ question.title }}</h2>
+            <div class="question-preview">
+                {{ question.content | strip_html | truncate: 150 }}
+            </div>
+            <div class="question-full-content" style="display: none;">
+                {{ question.content }}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
 <script>
-    document.querySelectorAll('.idea-card').forEach(card => {
+    document.querySelectorAll('.question-card').forEach(card => {
         card.addEventListener('click', () => {
             card.classList.toggle('expanded');
+            const fullContent = card.querySelector('.question-full-content');
+            const preview = card.querySelector('.question-preview');
+            if (card.classList.contains('expanded')) {
+                fullContent.style.display = 'block';
+                preview.style.display = 'none';
+            } else {
+                fullContent.style.display = 'none';
+                preview.style.display = 'block';
+            }
         });
     });
 </script>
