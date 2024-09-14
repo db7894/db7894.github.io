@@ -48,18 +48,3 @@ Google has a patent on [Distributed JIT compilation](https://patents.google.com/
 [Google's distributed compiler service](https://chromium.googlesource.com/infra/goma/client/+/6bae3f8023bfb7b861b2c0b1e12aa0be55f0f829/README.md) for open-source projects like Chromium and Androis. It's basically `distcc`+`ccache`. 
 
 Jussi Pakkanen has a few notes on architecture for a distributed compilation cluster [here](https://nibblestew.blogspot.com/2018/08/implementing-distributed-compilation.html). 
-
-
-## Sources
-- https://www.reddit.com/r/cpp/comments/y7ykx7/people_who_use_distributed_builds_how_do_you/
-- https://www.distcc.org/
-- https://en.wikipedia.org/wiki/Distcc
-- https://engineering.celonis.com/blog/homcc-a-traffic-efficient-distributed-compiler/
-- https://github.com/distcc/distcc
-- https://github.com/icecc/icecream
-- https://arxiv.org/pdf/2101.08887
-- https://thinkingeek.com/2021/12/31/using-distcc-in-a-cluster/
-- https://arxiv.org/abs/2305.14614
-- https://nibblestew.blogspot.com/2018/08/implementing-distributed-compilation.html
-- https://www.epj-conferences.org/articles/epjconf/abs/2020/21/epjconf_chep2020_05001/epjconf_chep2020_05001.html
-- https://indico.cern.ch/event/92498/contributions/1278963/attachments/1099550/1568598/kelemen-2010-hepix-lxdistcc.pdf
