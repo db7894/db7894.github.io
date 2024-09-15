@@ -23,6 +23,9 @@ I'm Daniel — I'm an ML Compiler Engineer and hobbyist writer/interviewer. I co
 
     <h2>places to find me</h2>
     <p>I'm most active on <a href="https://twitter.com/spaniel_bashir">twitter</a>, <a href="https://github.com/db7894">github</a>, <a href="https://substack.com/@danielbashir">substack</a>, and <a href="https://www.goodreads.com/user/show/78718254-daniel-bashir">goodreads</a>.</p>
+
+    <h2>misc</h2>
+    <p>here's some stuff <a href="{{ site.baseurl }}/music">I'm listening to</a></p>
   </div>
 </div>
 
