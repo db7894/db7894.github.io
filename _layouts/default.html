@@ -46,7 +46,7 @@
     {% comment %}
     Render content for questions and other pages
     {% endcomment %}
-    {% if page.layout == 'questions' or page.layout == 'page' or page.layout == 'default' %}
+    {% if page.layout == 'questions' or page.layout == 'page' or (page.layout == 'default' and page.url != '/') %}
         {{ content }}
     {% else %}
         {% comment %}
