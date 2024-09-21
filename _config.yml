@@ -14,6 +14,9 @@ description: "personal site"
 # This should be a person of some sort.
 author: "daniel bashir"
 
+include: ["spiral.html"]
+permalink: pretty
+
 # Would make sense to use the 'name:' above
 # here. This is an alternative title.
 title: "Daniel Bashir"
@@ -79,3 +82,5 @@ defaults:
       type: "questions"
     values:
       layout: "questions"
+
+future: true
