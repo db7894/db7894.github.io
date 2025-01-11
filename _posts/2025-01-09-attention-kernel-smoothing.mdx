@@ -1,0 +1,42 @@
+---
+title: "attention as kernel smoothing"
+description: "they're the same"
+date: 2025-01-09
+permalink: /attention-kernel-smoothing/
+layout: post
+tag: attention, transformers
+---
+
+<div class="post-content">
+  <p>
+  Fun fact: Cosma Shalizi is sort of my grand-advisor. To be precise, he was my undergraduate research advisor George Montañez's PhD advisor (I'm now remembering the tributes to Manuel Blum after my friend Sheon's profile of him: <a href="https://x.com/fortnow/status/1717525036330856690">"Manuel Blum was not my advisor, he was my advisor's advisor."</a>, <a href="https://x.com/Aaroth/status/1717551863359488027">"Manuel Blum was not my advisor, he was my advisor's father"</a>). 
+
+  In a great [blog post](https://bactra.org/notebooks/nn-attention-and-transformers.html), Shalizi wrote about how attention is a form of kernel smoothing. I think there are a few takeaways here. One is the relationship between the concepts themselves, which I'll elaborate a bit on here. The second is that some of the most game-changing research ideas aren't "new" in the sense we like to imagine — they're not _ex nihilo_. But even the same idea, the same underlying mathematics, presented with a different light in a different context with different terminology and intuition... can do so much more than it might have without this new presentation. 
+
+  I'll add more to this in time, but the main idea that Shalizi presents is that what was branded "attention" was really a form of kernel smoothing. Consider a kernel function $K(u,v)$ that measures how similar $u$ is to $v$, that is non-negative and maximized when $u = v$ (what's the simplest one you can think of?). 
+
+  A kernel adjusted for numerical overflow/underflow looks like this:
+  $$ K(u,v) = \text{exp}\left(\dfrac{\mathbf{w_1}u \cdot \mathbf{w_2}v}{\sqrt{d}}\right) $$
+  where the vectors $u$ and $v$ are $d$-dimensional. 
+
+  The kernel function can then be used as a weight in the average
+
+  $$ \sum_{i=1}^n y_i \dfrac{K(x_i,x_o)}{\sum_{j=1}^n K(x_j,x_o)} $$
+  In attention, $x_o$ is the query vector, the $x_i$ are the key vectors, and $y_i$ are the value vectors. In self-attention, $y_i = \mathbf{r}x_i$ for another square matrix $\mathbf{r}$. 
+
+  Anyway, I like staring at pictures and diagrams sometimes, so here's a little tool to play around with attention and kernel smoothing over an input. The input sequence is something much simpler than we actually work with: it's 50 points evenly spaced from 0 to 1 where each point has a value determined by a combo of sinusoidal functions. Kernel smoothing is intuitive — attention is taking each point's 4D positional encoding and transforming it into a query/key vector, computing similarity scores between those transformed positions, then using those similarities as weight to create a weighted average of the values (sinusoidal function vals). That's just attention!
+  
+  I'm not a UI Guy, so some explanation of what's going on is in order. What you're looking at is a little plot of the values produced by kernel smoothing and attention over the same input. Numerically they're not quite the same, as you should expect! I also added a little visualization of weight profiles at the middle position of the input sequence: we're seeing how much weight/attention the middle point gives every other point. In this case things don't look terribly different. Kernel smoothing weights decay symmetically (we have a bell curve centered at 0.5); attention weights can learn more complex patterns but here we just see a flatter bell curve. 
+
+  A few notes on the relationship:
+  1. Both mechanisms fundamentally are computing weighted averages, but they have different approaches to determining the weights — kernel smoothing uses a fixed function of position difference while attention learns its similarity function. 
+  2. Given some of the above, kernel smoothing is explicitly local while attention can learn arbitrary similarity patterns. So a properly trained attention mechanism could mimic kernel smoothing (and they'd look the same in the plot!), but it can learn other patterns as well. 
+  </p>
+  <br>
+
+  <div id="attention-explorer-root"></div>
+</div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="/js/attention-explorer.bundle.js"></script>

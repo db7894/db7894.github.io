@@ -14,7 +14,10 @@ description: "personal site"
 # This should be a person of some sort.
 author: "daniel bashir"
 
-include: ["spiral.html"]
+# include: ["spiral.html", "assets/js"]
+include: 
+  - "assets"
+  - "assets/js"
 permalink: pretty
 
 # Would make sense to use the 'name:' above
@@ -44,6 +47,8 @@ permalink: /:year/:month/:day/:title.html
 
 # Markdown
 markdown: kramdown
+plugins:
+  - jekyll-mdx
 
 # Collectios
 collections:
@@ -82,5 +87,14 @@ defaults:
       type: "questions"
     values:
       layout: "questions"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "*.mdx"
+    values:
+      layout: "post"
 
 future: true
