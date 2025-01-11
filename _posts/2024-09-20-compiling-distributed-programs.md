@@ -8,7 +8,7 @@ tag: compilers, distributed systems
 ---
 
 # [Alpa](https://arxiv.org/pdf/2201.12023)
-Alpa is a library that automates model-parallel training for larg deep learning models: it automatically generates execution plans that unify data, operator, and pipeline parallelism. Its key idea is viewing parallelisms in two hierarchical levels: _inter-operator_ and _intra-operator_. It designs compilation passes to automatically derive efficient parallel execution plans at each parallelism level. 
+Alpa is a library that automates model-parallel training for large deep learning models: it automatically generates execution plans that unify data, operator, and pipeline parallelism. Its key idea is viewing parallelisms in two hierarchical levels: _inter-operator_ and _intra-operator_. It designs compilation passes to automatically derive efficient parallel execution plans at each parallelism level. 
 
 ## Basics and Definitions
 The conventional view of ML parallelization approaches splits them into three categories:
