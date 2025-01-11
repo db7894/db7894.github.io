@@ -8,11 +8,11 @@ tag: attention, transformers
 ---
 
 <div class="post-content">
-  <p>Fun fact: Cosma Shalizi is sort of my grand-advisor. To be precise, he was my undergraduate research advisor George Montañez's PhD advisor (I'm now remembering the tributes to Manuel Blum after my friend Sheon's profile of him: <a href="https://x.com/fortnow/status/1717525036330856690" style="color: blue;">"Manuel Blum was not my advisor, he was my advisor's advisor."</a>, <a href="https://x.com/Aaroth/status/1717551863359488027" style="color: blue;">"Manuel Blum was not my advisor, he was my advisor's father"</a>).</p>
+  <p>Fun fact: Cosma Shalizi is sort of my grand-advisor. To be precise, he was my undergraduate research advisor George Montañez's PhD advisor (I'm now remembering the tributes to Manuel Blum after my friend Sheon's profile of him: <a href="https://x.com/fortnow/status/1717525036330856690" style="color: #8B1D1D;">"Manuel Blum was not my advisor, he was my advisor's advisor."</a>, <a href="https://x.com/Aaroth/status/1717551863359488027" style="color: #8B1D1D;">"Manuel Blum was not my advisor, he was my advisor's father"</a>).</p>
   
   <br>
 
-  <p>In a great <a href="https://bactra.org/notebooks/nn-attention-and-transformers.html" style="color: blue;">blog post</a>, Shalizi wrote about how attention is a form of kernel smoothing. I think there are a few takeaways here. One is the relationship between the concepts themselves, which I'll elaborate a bit on here. The second is that some of the most game-changing research ideas aren't "new" in the sense we like to imagine — they're not <em>ex nihilo</em>. But even the same idea, the same underlying mathematics, presented with a different light in a different context with different terminology and intuition... can do so much more than it might have without this new presentation.</p>
+  <p>In a great <a href="https://bactra.org/notebooks/nn-attention-and-transformers.html" style="color: #8B1D1D;">blog post</a>, Shalizi wrote about how attention is a form of kernel smoothing. I think there are a few takeaways here. One is the relationship between the concepts themselves, which I'll elaborate a bit on here. The second is that some of the most game-changing research ideas aren't "new" in the sense we like to imagine — they're not <em>ex nihilo</em>. But even the same idea, the same underlying mathematics, presented with a different light in a different context with different terminology and intuition... can do so much more than it might have without this new presentation.</p>
   
   <br>
 
@@ -41,7 +41,7 @@ tag: attention, transformers
   <br>
 
   <p>A few notes on the relationship:</p>
-  <ol>
+  <ol style="list-style-type: decimal; margin-left: 20px;">
     <li>Both mechanisms fundamentally are computing weighted averages, but they have different approaches to determining the weights — kernel smoothing uses a fixed function of position difference while attention learns its similarity function.</li>
     <li>Given some of the above, kernel smoothing is explicitly local while attention can learn arbitrary similarity patterns. So a properly trained attention mechanism could mimic kernel smoothing (and they'd look the same in the plot!), but it can learn other patterns as well.</li>
   </ol>
