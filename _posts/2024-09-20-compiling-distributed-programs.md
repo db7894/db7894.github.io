@@ -1,8 +1,8 @@
 ---
-title:          "compiling distributed ML systems"
-description:    "fun"
+title:          "Alpa"
+description:    "generating execution plans for model-parallel training"
 date:           2024-09-20
-permalink:      /compiling-distributed-ml-systems
+permalink:      /alpa
 layout: post
 tag: compilers, distributed systems
 ---
