@@ -355,17 +355,12 @@ hr {
  }
 
 @media only screen and (max-width: 570px) {
-
     li {
         margin: auto;
-        text-align: center;
         padding: 0 5px 0 0;
     }
     a {
         text-decoration: none;
-    }
-    p.desc {
-        text-align: center;
     }
     time {
         display: none;
@@ -536,4 +531,16 @@ hr {
 
 .post-content a {
     color: #8B1D1D;
+}
+
+.content {
+    &.post {
+        text-align: left;
+    }
+}
+
+.post {
+    p, li {
+        text-align: left;
+    }
 }
